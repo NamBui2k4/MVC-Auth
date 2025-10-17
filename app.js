@@ -4,11 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require("express-session")
-const productRouter = require('./routes/productRouter')
-const authRouter = require('./routes/login')
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const loginRouter = require('./routes/login')
+const  signinRouter = require('./routes/sigin')
+const loadingRouter = require('./routes/loading')
+var userRouter = require('./routes/user');
 
 var app = express();
 
@@ -24,9 +23,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/uploads', express.static('uploads'))
+app.use('/',loadingRouter)
+app.use('/login', loginRouter);
+app.use('/signin', signinRouter)
+
+app.use('/user', userRouter);
+
 
 app.use(session({
   secret: 'keyboard cat',
@@ -34,10 +36,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-app.use('/products', productRouter);
-// app.use('/products/add', productRouter)
 
-app.use('/login', authRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

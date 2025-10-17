@@ -1,25 +1,28 @@
 const User = require("../model/User");
 
 const moveToLogin = (req, res) =>{
-    res.render('loginView')
+    res.render('loginView', {error: ""})
 }
 
 const handleLogin = (req, res) =>{
-    const {email, pass} = req.body;
-    console.log({email, pass})
+    const {email, pass} = req.body
+
     const user = User.getUser(email, pass)
 
     if (user){
-        console.log("Đăng nhập thành công!!!")
-        res.redirect('/products')
+        res.render('profile', {user})
     }else{
-        console.log("Đăng nhập thất bại!!!")
-        res.render("loginView", { error: "Email hoặc mật khẩu không đúng!" })
+        res.render('loginView', {error : "thông tin đăng nhập không đúng"})
     }
+
 }
 
+const moveToSignin = (req, res) =>{
+    res.render('signin')
+}
 
 module.exports = {
     moveToLogin,
-    handleLogin
+    handleLogin,
+    moveToSignin
 }
