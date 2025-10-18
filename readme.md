@@ -1,4 +1,6 @@
-# 🔶 1. Tổng quan về Cookie & Session
+# Authentication 
+
+## 🔶 1. Tổng quan về Cookie & Session
 
 Session và Cookie là hai cơ chế quản lý trạng thái người dùng web app trong môi trường HTTP vốn "stateless" (Server không thể biết được 2 request có tới từ cùng 1 client hay không). Dù đều phục vụ mục đích lưu trữ thông tin tạm thời, chúng hoạt động ở hai tầng khác nhau: một bên là server, một bên là client. Dưới đây là cách hiểu dễ hình dung:
 
@@ -26,7 +28,7 @@ Session và Cookie là hai cơ chế quản lý trạng thái người dùng web
        ▼                      ▼                          ▼
 ┌─────────────┐     ┌────────────────────┐     ┌──────────────────┐
 │ cookieParser│     │ express-session    │     │  Database (User) │
-│ middleware  │     │ middleware         │     │  hoặc Redis       │
+│ middleware  │     │ middleware         │     │                  │
 └─────────────┘     └────────────────────┘     └──────────────────┘
 ```
 

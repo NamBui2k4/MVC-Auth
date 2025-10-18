@@ -10,15 +10,24 @@ const handleLogin = (req, res) =>{
     const user = User.getUser(email, pass)
 
     if (user){
-        res.render('profile', {user})
+        req.session.user = user;        
+          // Lấy thời gian còn lại (ms)
+        const sessionTTL = req.session.cookie.maxAge;
+
+        return res.render('profile', { user, sessionTTL });
     }else{
         res.render('loginView', {error : "thông tin đăng nhập không đúng"})
+
     }
 
 }
 
 const moveToSignin = (req, res) =>{
     res.render('signin')
+}
+
+const hangleSignin = (req, res) =>{
+    
 }
 
 module.exports = {

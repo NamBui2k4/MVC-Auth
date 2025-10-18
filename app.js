@@ -3,11 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const session = require("express-session")
-const loginRouter = require('./routes/login')
-const  signinRouter = require('./routes/sigin')
-const loadingRouter = require('./routes/loading')
+var bodyParser = require('body-parser');
+var dotenv = require('dotenv');
+
+const session = require("express-session");
+const loginRouter = require('./routes/login');
+const  signinRouter = require('./routes/sigin');
+const loadingRouter = require('./routes/loading');
 var userRouter = require('./routes/user');
+
+dotenv.config();
 
 var app = express();
 
@@ -22,6 +27,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
+app.use('/jquery', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
+app.use('/popper', express.static(path.join(__dirname, 'node_modules/@popperjs/core/dist/umd')))
+app.use('/fa', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free')))
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie:{
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60
+  }
+}));
+
 
 app.use('/',loadingRouter)
 app.use('/login', loginRouter);

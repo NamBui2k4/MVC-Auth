@@ -9,9 +9,4 @@ router.get('/', (req, res) =>{
     res.redirect('/loading')
 })
 
-
-// router.get('/home', () => {
-//     res.render('index')
-// })
-
 module.exports = router
