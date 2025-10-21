@@ -13,9 +13,11 @@ Nếu password dùng để xác thực danh tính một lần thì session &
 | **Cookie**  | Lưu ở phía **client** (trình duyệt). <br>Tự động gửi kèm mỗi request. <br> Có thể xem và chỉnh sửa. <br>|
 | **Session** | Lưu ở **server** (RAM hoặc DB). <br> Có thời hạn nhất định cho một người dùng request.   |
 
-- Session ở server sẽ nâng cao trải nghiệm người dùng (thông qua việc duy trì đăng nhập một lần, ghé thăm nhiều lần)
+- Session ở server sẽ nâng cao trải nghiệm người dùng (thông qua việc duy trì đăng nhập một lần, ghé thăm nhiều lần) cũng như xác thực một cách chính xác.
 
-- Trong khi đó cookie sẽ giải quyết tình trạng server bị gánh nặng lưu trữ dữ liệu người dùng khổng lồ. Khi người dùng đăng nhập thành công, server sẽ tạo một Session và gửi lại Cookie chứa sessionID cho trình duyệt. Từ đó về sau, mỗi request tiếp theo đều tự động gửi cookie này để duy trì trạng thái đăng nhập.
+- Trong khi đó cookie sẽ giải quyết tình trạng server bị gánh nặng lưu trữ dữ liệu. Thay vì lưu toàn bộ thông tin của người dùng ở phía server thì chỉ nên lưu những thông tin nhạy cảm như password, token. Còn những cái đơn giản như name, age,... thì lưu trong cookie ở phía client.
+
+- Khi người dùng đăng nhập thành công, server sẽ tạo một Session và gửi lại Cookie chứa sessionID cho trình duyệt. Từ đó về sau, mỗi request tiếp theo đều tự động gửi cookie này để duy trì trạng thái đăng nhập.
 
 ## 🔷 2. Triển khai với Express
 
