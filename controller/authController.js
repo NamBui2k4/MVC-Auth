@@ -10,9 +10,8 @@ const handleLogin = (req, res) =>{
     const user = User.getUser(email, pass)
 
     if (user){
-        req.session.user = user;        
-          // Lấy thời gian còn lại (ms)
-        const sessionTTL = req.session.cookie.maxAge;
+        req.session.user = user;  
+        const sessionTTL = req.session.cookie.maxAge;  // Lấy thời gian còn lại trong session (ms)
 
         return res.render('profile', { user, sessionTTL });
     }else{
